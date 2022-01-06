@@ -90,5 +90,15 @@ namespace Keis.Pages
         {
             e.Row.Header = (e.Row.GetIndex() + 1).ToString();
         }
+
+        private void deleteBtn(object sender, RoutedEventArgs e)
+        {
+            DataRowView dataRowView = (DataRowView)((Button)e.Source).DataContext;
+            String passwordId = dataRowView[0].ToString();
+
+            pManager.deletePassword(passwordId);
+            MessageBox.Show("Password Deleted");
+            loadData();
+        }
     }
 }
