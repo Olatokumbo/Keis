@@ -24,6 +24,7 @@ namespace Keis.Pages
     public partial class Login : Window
     {
         string id, username, password;
+        bool isAdmin;
         string connectionString = ConfigurationManager.ConnectionStrings["keis"].ConnectionString;
         PasswordCrypto passwordCrypto = new PasswordCrypto();
         //User user;
@@ -56,11 +57,12 @@ namespace Keis.Pages
                         id = row["id"].ToString();
                         username = row["username"].ToString();
                         password = row["password"].ToString();
+                        isAdmin = bool.Parse(row["isAdmin"].ToString());
                         
                     }
                     //user = new User(id, username, false);
                     //If credentials are valid
-                    Home hm = new Home(id, username);
+                    Home hm = new Home(id, username, isAdmin);
                     hm.Show();
                     this.Close();
                 }

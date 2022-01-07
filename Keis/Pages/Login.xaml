@@ -45,6 +45,6 @@
             </Button.Resources>
         </Button>
         <Label Grid.Column="1" HorizontalAlignment="Center" Margin="0,245,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="#FFF88617" FontSize="15" Content="Register Here" MouseDown="register" />
-        <Label Grid.Column="1" HorizontalAlignment="Center" Margin="109,12,121,0" Grid.Row="2" VerticalAlignment="Top" Foreground="#FFF88617" FontSize="15" Content="Forgot Password" MouseDown="forgotPassword" />
+        <Label Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Top" Foreground="#FFF8F817" FontSize="15" Content="Forgot Password" MouseDown="forgotPassword" />
     </Grid>
 </Window>

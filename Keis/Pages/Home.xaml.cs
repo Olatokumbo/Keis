@@ -23,32 +23,32 @@ namespace Keis.Pages
     /// </summary>
     public partial class Home : Window
     {
-        string username;
-        string id;
         string connectionString = ConfigurationManager.ConnectionStrings["keis"].ConnectionString;
         PasswordManager pManager = new PasswordManager();
         User user;
 
-        public Home(string id, string username)
+        public Home(string id, string username, bool isAdmin)
         {
             InitializeComponent();
             dataGridPasswords.Columns[0].Visibility = Visibility.Hidden;
-            this.username = username;
-            this.id = id;
             MessageBox.Show("Welcome "+ username);
-            user = new User(id, username, false);
+            user = new User(id, username, isAdmin);
             loadData();
         }
 
         private void loadData()
         {
-            dataGridPasswords.DataContext = pManager.viewPasswords(id); //to be sorted out
+            if (user.isAdmin)
+                dataGridPasswords.DataContext = pManager.viewAllPasswords();
+            else
+                dataGridPasswords.DataContext = pManager.viewPasswords(user.userId);
         }
 
         private void logout(object sender, RoutedEventArgs e)
         {
             Login log = new Login();
             log.Show();
+            user.logout();
             this.Close();
         }
 
@@ -82,7 +82,7 @@ namespace Keis.Pages
             DataRowView dataRowView = (DataRowView)((Button)e.Source).DataContext;
             String passwordId = dataRowView[0].ToString();
 
-            EditPassword ep = new EditPassword(passwordId, id);
+            EditPassword ep = new EditPassword(passwordId, user.userId);
             ep.Show();
         }
 

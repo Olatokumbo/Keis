@@ -14,7 +14,6 @@ namespace Keis
         string connectionString = ConfigurationManager.ConnectionStrings["keis"].ConnectionString;
         PasswordCrypto passwordCrypto = new PasswordCrypto();
         Search Searcher = new Search();
-        User user;
         public Object viewPasswords(string userId)
         {
             MySqlConnection thisConnection = new MySqlConnection(connectionString);
@@ -38,6 +37,31 @@ namespace Keis
                 thisConnection.Close();
             }
         }
+
+        public Object viewAllPasswords()
+        {
+            MySqlConnection thisConnection = new MySqlConnection(connectionString);
+            try
+            {
+                thisConnection.Open();
+                string query = "SELECT id, name, username, password, category, websiteURL, developerName from passwords";
+                MySqlCommand cmd = new MySqlCommand(query, thisConnection);
+                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds, "LoadDataBinding");
+                return ds;
+            }
+            catch (Exception m)
+            {
+                Console.WriteLine(m);
+                return thisConnection;
+            }
+            finally
+            {
+                thisConnection.Close();
+            }
+        }
+
         public Dictionary<string, string> viewPassword(string id)
         {
             MySqlConnection thisConnection = new MySqlConnection(connectionString);
