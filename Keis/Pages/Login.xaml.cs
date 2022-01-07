@@ -32,6 +32,13 @@ namespace Keis.Pages
             InitializeComponent();
         }
 
+        private void forgotPassword(object sender, MouseButtonEventArgs e)
+        {
+            PasswordRecovery PR = new PasswordRecovery();
+            PR.Show();
+            this.Close();
+        }
+
         private void login(object sender, RoutedEventArgs e)
         {
             password = passwordCrypto.encrypt(Password.Text);
