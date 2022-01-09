@@ -84,6 +84,23 @@ namespace Keis.Pages
                     }
                     else MessageBox.Show("Invalid inputs", "Error");
                     break;
+                case 1:
+                    if (Name.Text.Length >= 3 && Username.Text.Length >= 3 && Password.Text.Length >= 3 && WebsiteURL.Text.Length >= 3)
+                    {
+                        Website website = new Website(Name.Text, Username.Text, Password.Text, WebsiteURL.Text, userId);
+                        website.editPassword(id);
+                    }
+                    else MessageBox.Show("Invalid inputs", "Error");
+                    break;
+
+                case 2:
+                    if (Name.Text.Length >= 3 && Username.Text.Length >= 3 && Password.Text.Length >= 3 && DeveloperName.Text.Length >= 3)
+                    {
+                        Game game = new Game(Name.Text, Username.Text, Password.Text,DeveloperName.Text, userId);
+                        game.editPassword(id);
+                    }
+                    else MessageBox.Show("Invalid inputs", "Error");
+                    break;
                 default:
 
                     break;

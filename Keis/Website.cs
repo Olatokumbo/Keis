@@ -44,5 +44,30 @@ namespace Keis
                 thisConnection.Close();
             }
         }
+    
+            public void editPassword(string id)
+        {
+            Console.WriteLine("Edit Password");
+            MySqlConnection thisConnection = new MySqlConnection(connectionString);
+            DateTime myDateTime = DateTime.Now;
+            string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
+            lastUpdated = sqlFormattedDate; 
+
+            try
+            {
+                thisConnection.Open();
+                string query = "UPDATE passwords SET name ='" + name + "', username ='" + username + "', websiteURL = '"+ websiteURL +"', password ='" + password + "', category ='" + category + "', lastUpdated ='" + lastUpdated + "' WHERE id ='" + id + "'";
+                MySqlCommand cmd = new MySqlCommand(query, thisConnection);
+                MySqlDataReader row = cmd.ExecuteReader();
+            }
+            catch (Exception m)
+            {
+                Console.WriteLine(m);
+            }
+            finally
+            {
+                thisConnection.Close();
+            }
+        }
     }
 }

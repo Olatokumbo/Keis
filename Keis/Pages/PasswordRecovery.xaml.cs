@@ -78,6 +78,7 @@ namespace Keis.Pages
                         this.Verify.IsEnabled = true;
                         this.Search.IsEnabled = false;
                         this.Password.IsEnabled = true;
+                        this.Username.IsEnabled = false;
                     }
                     reader.Close();
                
