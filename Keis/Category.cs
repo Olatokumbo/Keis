@@ -33,7 +33,7 @@ namespace Keis
             try
             {
                 thisConnection.Open();
-                string query = "INSERT INTO passwords(name, username, password, category, dateCreated, lastUpdated, id) VALUES ('" + name + "', '" + username + "', '" + password + "','" + category + "','" + sqlFormattedDate + "', '"+ sqlFormattedDate + "','" + userId + "')";
+                string query = "INSERT INTO passwords(name, username, password, category, dateCreated, lastUpdated, userId) VALUES ('" + name + "', '" + username + "', '" + password + "','" + category + "','" + sqlFormattedDate + "', '"+ sqlFormattedDate + "','" + userId + "')";
                 MySqlCommand cmd = new MySqlCommand(query, thisConnection);
                 MySqlDataReader row = cmd.ExecuteReader();
             }
