@@ -14,22 +14,21 @@ namespace Keis
         PasswordCrypto passwordCrypto = new PasswordCrypto();
         public Website(string name, string username, string password, string websiteURL, string userId)
         {
-            this.name = name;
-            this.username = username;
-            this.password = passwordCrypto.encrypt(password);
-            this.websiteURL = websiteURL;
-            this.userId = userId;
+            this.name = name; //Set Website Name
+            this.username = username; //Set Username
+            this.password = passwordCrypto.encrypt(password); //Set encrypted Password
+            this.websiteURL = websiteURL; //Set Website URL
+            this.userId = userId; //Set UserId
         }
         public void savePassword()
         {
             Console.WriteLine("Save Password");
-            MySqlConnection thisConnection = new MySqlConnection(connectionString);
-            DateTime myDateTime = DateTime.Now;
+            MySqlConnection thisConnection = new MySqlConnection(connectionString); //Initialize Connection
+            DateTime myDateTime = DateTime.Now; //Current Date Info
             string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
-            //dateCreated = sqlFormattedDate;
-
             try
             {
+                //Insert Password into SQL Database
                 thisConnection.Open();
                 string query = "INSERT INTO passwords(name, username, password, category, dateCreated, lastUpdated, websiteURL, userId) VALUES ('" + name + "', '" + username + "', '" + password + "','" + category + "','" + sqlFormattedDate + "', '" + sqlFormattedDate + "','" + websiteURL + "', '"+ userId +"')";
                 MySqlCommand cmd = new MySqlCommand(query, thisConnection);
@@ -41,20 +40,21 @@ namespace Keis
             }
             finally
             {
-                thisConnection.Close();
+                thisConnection.Close(); //Close Connection
             }
         }
     
-            public void editPassword(string id)
+        public void editPassword(string id)
         {
             Console.WriteLine("Edit Password");
-            MySqlConnection thisConnection = new MySqlConnection(connectionString);
-            DateTime myDateTime = DateTime.Now;
+            MySqlConnection thisConnection = new MySqlConnection(connectionString); //Initialize Connection
+            DateTime myDateTime = DateTime.Now; //Current Date Info
             string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
             lastUpdated = sqlFormattedDate; 
 
             try
             {
+                //Update Password in Database
                 thisConnection.Open();
                 string query = "UPDATE passwords SET name ='" + name + "', username ='" + username + "', websiteURL = '"+ websiteURL +"', password ='" + password + "', category ='" + category + "', lastUpdated ='" + lastUpdated + "' WHERE id ='" + id + "'";
                 MySqlCommand cmd = new MySqlCommand(query, thisConnection);
@@ -66,7 +66,7 @@ namespace Keis
             }
             finally
             {
-                thisConnection.Close();
+                thisConnection.Close(); //Close Connection
             }
         }
     }

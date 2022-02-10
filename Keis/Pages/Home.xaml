@@ -55,6 +55,13 @@
                 </Style>
             </Button.Resources>
         </Button>
+        <Button Content="Sort" Grid.Column="2" HorizontalAlignment="Right" Margin="0,33,92,37" VerticalAlignment="Center" Width="36" RenderTransformOrigin="0.5,0.5" Height="30"  Click="sort" >
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
         <DataGrid IsReadOnly="True" Grid.Column="2" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="dataGridPasswords" Width="auto" Height="auto" ItemsSource="{Binding Path=LoadDataBinding}" CanUserResizeRows="False" AutoGenerateColumns="False" Grid.Row="1" LoadingRow="addRow">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=id}" Header="ID" Width="30" IsReadOnly="True" />

@@ -17,9 +17,5 @@ namespace Keis
             this.userId = userId;
         }
 
-        //public void savePassword()
-        //{
-        //    Console.WriteLine("Saving Password "+this.name);
-        //}
     }
 }

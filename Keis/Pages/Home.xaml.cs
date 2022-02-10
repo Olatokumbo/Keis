@@ -32,13 +32,13 @@ namespace Keis.Pages
             InitializeComponent();
             dataGridPasswords.Columns[0].Visibility = Visibility.Hidden;
             MessageBox.Show("Welcome "+ username);
-            user = new User(id, username, isAdmin);
-            loadData();
+            user = new User(id, username, isAdmin); //Initialize User
+            loadData(); //Load Password info
         }
 
         private void loadData()
         {
-            if (user.isAdmin)
+            if (user.isAdmin) //Checks if a user is an admin
                 dataGridPasswords.DataContext = pManager.viewAllPasswords();
             else
                 dataGridPasswords.DataContext = pManager.viewPasswords(user.userId);
@@ -99,6 +99,11 @@ namespace Keis.Pages
             pManager.deletePassword(passwordId);
             MessageBox.Show("Password Deleted");
             loadData();
+        }
+
+        private void sort(object sender, RoutedEventArgs e)
+        {
+            dataGridPasswords.DataContext = pManager.sortPasswords(user.userId);
         }
     }
 }

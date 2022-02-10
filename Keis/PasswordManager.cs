@@ -16,9 +16,10 @@ namespace Keis
         Search Searcher = new Search();
         public Object viewPasswords(string userId)
         {
-            MySqlConnection thisConnection = new MySqlConnection(connectionString);
+            MySqlConnection thisConnection = new MySqlConnection(connectionString); //Initialize Connection
             try
             {
+                //Query Password by the User Id
                 thisConnection.Open();
                 string query = "SELECT id, name, username, password, category, websiteURL, developerName from passwords WHERE userId = '" + userId + "'";
                 MySqlCommand cmd = new MySqlCommand(query, thisConnection);
@@ -34,15 +35,41 @@ namespace Keis
             }
             finally
             {
-                thisConnection.Close();
+                thisConnection.Close(); //Close Connection
+            }
+        }
+
+        public Object sortPasswords(string userId)
+        {
+            MySqlConnection thisConnection = new MySqlConnection(connectionString); //Initialize Connection
+            try
+            {
+                //Sort Password by the lastUPdated value
+                thisConnection.Open();
+                string query = "SELECT id, name, username, password, category, websiteURL, developerName from passwords WHERE userId = '" + userId + "' ORDER BY lastUpdated DESC";
+                MySqlCommand cmd = new MySqlCommand(query, thisConnection);
+                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds, "LoadDataBinding");
+                return ds;
+            }
+            catch (Exception m)
+            {
+                Console.WriteLine(m);
+                return thisConnection;
+            }
+            finally
+            {
+                thisConnection.Close(); //Close Connection
             }
         }
 
         public Object viewAllPasswords()
         {
-            MySqlConnection thisConnection = new MySqlConnection(connectionString);
+            MySqlConnection thisConnection = new MySqlConnection(connectionString); //Initialize Connection
             try
             {
+                //View All Passwords (Admin can only do this)
                 thisConnection.Open();
                 string query = "SELECT id, name, username, password, category, websiteURL, developerName from passwords";
                 MySqlCommand cmd = new MySqlCommand(query, thisConnection);
@@ -64,10 +91,11 @@ namespace Keis
 
         public Dictionary<string, string> viewPassword(string id)
         {
-            MySqlConnection thisConnection = new MySqlConnection(connectionString);
+            MySqlConnection thisConnection = new MySqlConnection(connectionString); //Initialize Connection
             Dictionary<string, string> password = new Dictionary<string, string>();
             try
             {
+                //Query Password by the Parent Id
                 thisConnection.Open();
                 string query = "SELECT id, name, username, password, category, websiteURL, developerName from passwords WHERE id = '" + id + "'";
                 MySqlCommand cmd = new MySqlCommand(query, thisConnection);
@@ -98,57 +126,17 @@ namespace Keis
             }
             finally
             {
-                thisConnection.Close();
+                thisConnection.Close(); //Close Connection
             }
         }
 
-        public void updatePassword(string id, string password)
-        {
-            Console.WriteLine("Update Password");
-            MySqlConnection thisConnection = new MySqlConnection(connectionString);
-            try
-            {
-                thisConnection.Open();
-                string query = "UPDATE passwords SET password = '" + passwordCrypto.encrypt(password) + "' WHERE id= '" + id + "'";
-                MySqlCommand cmd = new MySqlCommand(query, thisConnection);
-                MySqlDataReader row = cmd.ExecuteReader();
-            }
-            catch (Exception m)
-            {
-                Console.WriteLine(m);
-            }
-            finally
-            {
-                thisConnection.Close();
-            }
-        }
-
-        //public void addPassword(string name, string username, string password, string category)
-        //{
-        //    Console.WriteLine("Update Password");
-        //    MySqlConnection thisConnection = new MySqlConnection(connectionString);
-        //    try
-        //    {
-        //        thisConnection.Open();
-        //        string query = "INSERT INTO passwords VALUES ('"+ name + "', '" + username + "', '" + password + "','" + category + "' )";
-        //        MySqlCommand cmd = new MySqlCommand(query, thisConnection);
-        //        MySqlDataReader row = cmd.ExecuteReader();
-        //    }
-        //    catch (Exception m)
-        //    {
-        //        Console.WriteLine(m);
-        //    }
-        //    finally
-        //    {
-        //        thisConnection.Close();
-        //    }
-        //}
         public void deletePassword(string id)
         {
             Console.WriteLine("Delete Password");
-            MySqlConnection thisConnection = new MySqlConnection(connectionString);
+            MySqlConnection thisConnection = new MySqlConnection(connectionString); //Initialize Connection
             try
             {
+                //Delete Password by Id from SQL Database
                 thisConnection.Open();
                 string query = "DELETE from passwords WHERE id = '" + id + "'";
                 MySqlCommand cmd = new MySqlCommand(query, thisConnection);
@@ -160,10 +148,11 @@ namespace Keis
             }
             finally
             {
-                thisConnection.Close();
+                thisConnection.Close(); //Close Connection
             }
         }
     
+        //Search Password
         public Object searchPassword(string word)
         {
             return Searcher.search(word);

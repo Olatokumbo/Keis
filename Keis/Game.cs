@@ -24,13 +24,13 @@ namespace Keis
         public void savePassword()
         {
             Console.WriteLine("Save Password");
-            MySqlConnection thisConnection = new MySqlConnection(connectionString);
-            DateTime myDateTime = DateTime.Now;
+            MySqlConnection thisConnection = new MySqlConnection(connectionString); //Intialize Connection
+            DateTime myDateTime = DateTime.Now; //Current Date info
             string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
-            //dateCreated = sqlFormattedDate;
 
             try
             {
+                //Insert Password into SQL Database
                 thisConnection.Open();
                 string query = "INSERT INTO passwords(name, username, password, category, dateCreated, lastUpdated, developerName, userId) VALUES ('" + name + "', '" + username + "', '" + password + "','" + category + "','" + sqlFormattedDate + "', '" + sqlFormattedDate + "','" + developerName + "', '" + userId + "')";
                 MySqlCommand cmd = new MySqlCommand(query, thisConnection);
@@ -42,20 +42,21 @@ namespace Keis
             }
             finally
             {
-                thisConnection.Close();
+                thisConnection.Close(); //Close Connection
             }
         }
 
         public void editPassword(string id)
         {
             Console.WriteLine("Edit Password");
-            MySqlConnection thisConnection = new MySqlConnection(connectionString);
-            DateTime myDateTime = DateTime.Now;
+            MySqlConnection thisConnection = new MySqlConnection(connectionString); //Initialize Connection
+            DateTime myDateTime = DateTime.Now; //Current date info
             string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
             lastUpdated = sqlFormattedDate;
 
             try
             {
+                //Update Password in SQL Database
                 thisConnection.Open();
                 string query = "UPDATE passwords SET name ='" + name + "', username ='" + username + "', developerName = '"+ developerName +"', password ='" + password + "', category ='" + category + "', lastUpdated ='" + lastUpdated + "' WHERE id ='" + id + "'";
                 MySqlCommand cmd = new MySqlCommand(query, thisConnection);
@@ -67,7 +68,7 @@ namespace Keis
             }
             finally
             {
-                thisConnection.Close();
+                thisConnection.Close(); //Close Connection
             }
         }
 

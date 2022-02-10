@@ -9,6 +9,7 @@ namespace Keis
     class PasswordGen
     {
         private int passwordLength = 10;
+        //List of characters that can be used
         private char[] characterList = { 'A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E',
                                          'e', 'F', 'f', 'G', 'g', 'H', 'h', 'I', 'i',
                                          'J', 'j', 'K', 'k', 'L', 'l', 'M', 'm', 'O',
@@ -21,6 +22,7 @@ namespace Keis
         {
             string randomPassword = "";
             Random rnd = new Random();
+            //Generate a random character after every loop and concatenates it
             for (int i = 0; i < passwordLength; i++)
             {
                 int characterIndex = rnd.Next(0, characterList.Length);
